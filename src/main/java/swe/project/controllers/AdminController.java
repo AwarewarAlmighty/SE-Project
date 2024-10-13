@@ -21,6 +21,6 @@ public class AdminController {
   }
 
   public void run() {
-
+    System.out.println("Welcome to the Admin Console Application!");
   }
 }
