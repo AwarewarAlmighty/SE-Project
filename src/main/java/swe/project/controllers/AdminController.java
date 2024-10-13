@@ -2,7 +2,7 @@ package main.java.swe.project.controllers;
 
 import java.util.List;
 
-import models.User;
+import main.java.swe.project.models.User;
 
 public class AdminController {
   private List<User> users;

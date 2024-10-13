@@ -1,6 +1,7 @@
 package main.java.swe.project.controllers;
 
-import models.User;
+import main.java.swe.project.models.User;
+import java.util.List;
 
 public class UserController {
   private List<User> users;
