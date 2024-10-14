@@ -28,9 +28,9 @@ public class AdminController {
         scanner = new Scanner(System.in);
     }
 
-    private User findUserByUsername(String username) {
+    private User findUserByUsername(String name) {
         for (User user : users) {
-            if (user.getName().equals(username)) {
+            if (user.getName().equalsIgnoreCase(name)) {
                 return user;
             }
         }
@@ -39,7 +39,7 @@ public class AdminController {
 
     //load user data
     private void loadUsers() {
-        try (FileReader reader = new FileReader("../data/users.json")) {
+        try (FileReader reader = new FileReader("src\\main\\java\\swe\\project\\data\\users.json")) {
             Gson gson = new Gson();
             StringBuilder sb = new StringBuilder();
             int ch;
@@ -57,7 +57,7 @@ public class AdminController {
 
     //saves user data
     private void saveUsers() {
-        try (FileWriter writer = new FileWriter("../data/users.json")) {
+        try (FileWriter writer = new FileWriter("src\\main\\java\\swe\\project\\data\\users.json")) {
             Gson gson = new Gson();
             gson.toJson(users, writer);
         } catch (IOException e) {
@@ -91,7 +91,8 @@ public class AdminController {
             System.out.println("2. Read User");
             System.out.println("3. Update User");
             System.out.println("4. Delete User");
-            System.out.println("5. Exit");
+            System.out.println("5. Load all User");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
@@ -111,6 +112,9 @@ public class AdminController {
                     deleteUser();
                     break;
                 case 5:
+                    loadUsers();
+                    break;
+                case 6:
                     System.out.println("Exiting Admin Console...");
                     return;
                 default:
