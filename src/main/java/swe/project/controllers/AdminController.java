@@ -113,6 +113,7 @@ public class AdminController {
                     break;
                 case 5:
                     loadUsers();
+                    break;
                 case 6:
                     System.out.println("Exiting Admin Console...");
                     return;
