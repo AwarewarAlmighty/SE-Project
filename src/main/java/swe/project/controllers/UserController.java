@@ -34,7 +34,7 @@ public class UserController {
 
     // Save users back to JSON file
     private void saveUsers() {
-        try (FileWriter writer = new FileWriter("users.json")) {
+        try (FileWriter writer = new FileWriter("src\\main\\java\\swe\\project\\data\\users.json")) {
             Gson gson = new Gson();
             gson.toJson(users, writer);
         } catch (IOException e) {
@@ -52,16 +52,18 @@ public class UserController {
         return null;
     }
 
-    // User login based on name
-    public boolean login(String name) {
+    // User login based on name and PIN
+    public boolean login(String name, int pin) {
         currentUser = findUserByName(name);
-        if (currentUser != null) {
+        if (currentUser != null && currentUser.getPin() == pin) {
             System.out.println("Login successful! Welcome, " + currentUser.getName());
             return true;
+        } else if (currentUser != null) {
+            System.out.println("Invalid PIN.");
         } else {
             System.out.println("User not found.");
-            return false;
         }
+        return false;
     }
 
     // View current user's balance
@@ -94,7 +96,10 @@ public class UserController {
         System.out.print("Enter your name: ");
         String name = scanner.nextLine();
 
-        if (!login(name)) {
+        System.out.print("Enter your PIN: ");
+        int pin = scanner.nextInt();
+
+        if (!login(name, pin)) {
             return;
         }
 
