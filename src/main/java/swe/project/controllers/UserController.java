@@ -23,7 +23,7 @@ public class UserController {
 
     // Load users from JSON file
     private void loadUsers() {
-        try (FileReader reader = new FileReader("users.json")) {
+        try (FileReader reader = new FileReader("src\\main\\java\\swe\\project\\data\\users.json")) {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<User>>(){}.getType();
             users = gson.fromJson(reader, listType);
