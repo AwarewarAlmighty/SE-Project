@@ -58,6 +58,7 @@ public class AdminController {
         System.out.print("Enter admin password: ");
         String password = loginScanner.nextLine();
 
+
         if (username.equals(adminUsername) && password.equals(adminPassword)) {
             System.out.println("Welcome to the Admin Console Application!");
         } else {
@@ -67,3 +68,4 @@ public class AdminController {
         loginScanner.close();
     }
 }
+
