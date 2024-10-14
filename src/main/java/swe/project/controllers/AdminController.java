@@ -24,7 +24,7 @@ public class AdminController {
     }
 
     private void loadUsers() {
-        try (FileReader reader = new FileReader("users.json")) {
+        try (FileReader reader = new FileReader("../data/users.json")) {
           Gson gson = new Gson(); // Create a Gson instance
 
           // Read the entire JSON file into a String
