@@ -32,7 +32,7 @@ public class User {
   }
 
   public void setPin(int pin) {
-    if (pin >= 100000 && ping <= 999999) {
+    if (pin >= 100000 && pin <= 999999) {
       this.pin = pin;
     } else {
       System.out.println("PIN must be a 4-digit number");
