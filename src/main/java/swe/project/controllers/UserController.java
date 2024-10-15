@@ -75,15 +75,39 @@ public class UserController {
         }
     }
 
-    // Update current user's balance
-    public void updateBalance() {
+    // Deposit funds to the current user's balance
+    public void depositFunds() {
         if (currentUser != null) {
             Scanner input = new Scanner(System.in);
-            System.out.print("Enter new balance: ");
-            double newBalance = input.nextDouble();
-            currentUser.setBalance(newBalance);
-            saveUsers(); // Save the updated balance
-            System.out.println("Balance updated successfully.");
+            System.out.print("Enter the amount to deposit: ");
+            double amount = input.nextDouble();
+            if (amount > 0) {
+                currentUser.setBalance(currentUser.getBalance() + amount);
+                saveUsers();
+                System.out.println("Deposited $" + amount + " successfully.");
+            } else {
+                System.out.println("Deposit amount must be positive.");
+            }
+        } else {
+            System.out.println("No user is logged in.");
+        }
+    }
+
+    // Withdraw funds from the current user's balance
+    public void withdrawFunds() {
+        if (currentUser != null) {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Enter the amount to withdraw: ");
+            double amount = input.nextDouble();
+            if (amount > 0 && amount <= currentUser.getBalance()) {
+                currentUser.setBalance(currentUser.getBalance() - amount);
+                saveUsers();
+                System.out.println("Withdrew $" + amount + " successfully.");
+            } else if (amount > currentUser.getBalance()) {
+                System.out.println("Insufficient balance for this withdrawal.");
+            } else {
+                System.out.println("Withdrawal amount must be positive.");
+            }
         } else {
             System.out.println("No user is logged in.");
         }
@@ -108,8 +132,9 @@ public class UserController {
         do {
             System.out.println("\nUser Menu:");
             System.out.println("1. View Balance");
-            System.out.println("2. Update Balance");
-            System.out.println("3. Exit");
+            System.out.println("2. Deposit Funds");
+            System.out.println("3. Withdraw Funds");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -119,14 +144,17 @@ public class UserController {
                     viewBalance();
                     break;
                 case 2:
-                    updateBalance();
+                    depositFunds();
                     break;
                 case 3:
+                    withdrawFunds();
+                    break;
+                case 4:
                     System.out.println("Exiting...");
                     break;
                 default:
                     System.out.println("Invalid choice.");
             }
-        } while (choice != 3);
+        } while (choice != 4);
     }
 }
