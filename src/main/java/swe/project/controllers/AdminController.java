@@ -132,6 +132,15 @@ public class AdminController {
         scanner.nextLine(); // Consume newline
 
         User newUser = new User(username, balance);
+
+        System.out.print("Enter email: ");
+        String email = scanner.nextLine();
+        newUser.setEmail(email);
+
+        System.out.print("Enter PIN: ");
+        String pin = scanner.nextLine();
+        newUser.setPin(pin);
+
         users.add(newUser);
         saveUsers();
         System.out.println("User created successfully!");
@@ -172,6 +181,18 @@ public class AdminController {
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid balance input. Balance not updated.");
                 }
+            }
+
+            System.out.print("New email (" + user.getEmail() + "): ");
+            String newEmail = scanner.nextLine();
+            if (!newEmail.isEmpty()) {
+                user.setEmail(newEmail);
+            }
+
+            System.out.print("New PIN (" + user.getPin() + "): ");
+            String newPin = scanner.nextLine();
+            if (!newPin.isEmpty()) {
+                user.setPin(newPin);
             }
 
             saveUsers();
