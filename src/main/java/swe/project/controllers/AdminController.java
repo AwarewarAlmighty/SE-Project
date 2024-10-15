@@ -138,8 +138,13 @@ public class AdminController {
         newUser.setEmail(email);
 
         System.out.print("Enter PIN: ");
-        String pin = scanner.nextLine();
-        newUser.setPin(pin);
+            String pinStr = scanner.nextLine();
+            try {
+                int pin = Integer.parseInt(pinStr);
+                newUser.setPin(pin);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid integer for the PIN.");
+            }
 
         users.add(newUser);
         saveUsers();
@@ -190,9 +195,14 @@ public class AdminController {
             }
 
             System.out.print("New PIN (" + user.getPin() + "): ");
-            String newPin = scanner.nextLine();
-            if (!newPin.isEmpty()) {
-                user.setPin(newPin);
+            String newPinStr = scanner.nextLine();
+            if (!newPinStr.isEmpty()) {
+                try {
+                    int newPin = Integer.parseInt(newPinStr);
+                    user.setPin(newPin);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid integer for the PIN.");
+                }
             }
 
             saveUsers();
